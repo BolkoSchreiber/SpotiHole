@@ -3,6 +3,7 @@
 ### A modified Spotify client for Windows
 
 [![HitCount](https://views.whatilearened.today/views/github/meik97/SpotiHole.svg)](http://hits.dwyl.com)
+[![Discord](https://discordapp.com/api/guilds/783389538910601220/widget.png)](https://discord.gg/xUyxHesCGj)
 
 
 ## Features:
