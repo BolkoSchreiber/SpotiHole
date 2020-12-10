@@ -84,6 +84,6 @@ namespace Modules
 	{
 		Utils::Utils::DebugPrint("Applying AdBlock patch...");
 		Utils::Hook::InstallJmp(Functions::IsSkippable, EnableSkips_hk);
-		Utils::Hook::InstallJmp((void*)0x0CB6143, SetCurrentTrack_stub);
+		Utils::Hook::InstallJmp((void*)0xCB6143, SetCurrentTrack_stub);
 	}
 }

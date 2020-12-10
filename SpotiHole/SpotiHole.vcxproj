@@ -115,6 +115,9 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(TargetDir)$(ProjectName).dll" "C:\Users\Meik\AppData\Roaming\Spotify\$(ProjectName).dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -154,6 +157,7 @@
     <ClInclude Include="Components\include\BaseInclude.hpp" />
     <ClInclude Include="Components\Modules\AdBlock.hpp" />
     <ClInclude Include="Components\Modules\AutoUpdates.hpp" />
+    <ClInclude Include="Components\Modules\Bitrate.hpp" />
     <ClInclude Include="Components\Modules\Functions.hpp" />
     <ClInclude Include="Components\Modules\Initialization.hpp" />
     <ClInclude Include="Components\Modules\QuickPatch.hpp" />
@@ -163,6 +167,7 @@
   <ItemGroup>
     <ClCompile Include="Components\Modules\AdBlock.cpp" />
     <ClCompile Include="Components\Modules\AutoUpdates.cpp" />
+    <ClCompile Include="Components\Modules\Bitrate.cpp" />
     <ClCompile Include="Components\Modules\Functions.cpp" />
     <ClCompile Include="Components\Modules\Initialization.cpp" />
     <ClCompile Include="Components\Modules\QuickPatch.cpp" />
