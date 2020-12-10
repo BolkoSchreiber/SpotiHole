@@ -19,4 +19,5 @@
 #include "..\Modules\AdBlock.hpp"
 #include "..\Modules\Functions.hpp"
 #include "..\Modules\QuickPatch.hpp"
+#include "..\Modules\Bitrate.hpp"
 
