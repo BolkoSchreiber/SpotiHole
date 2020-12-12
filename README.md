@@ -23,3 +23,6 @@ You need Microsoft's [Visual C++ Redistributable Runtimes](https://github.com/ab
 ## Tested versions:
 
 - 1.1.42.622.gbd112320
+
+## Disclaimer:
+This software has been created purely for the purposes of educational research. Project maintainers are not responsible or liable for misuse of the software. Use responsibly.
