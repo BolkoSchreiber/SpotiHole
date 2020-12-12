@@ -19,6 +19,7 @@ DWORD WINAPI Exec(LPVOID lpParam)
 {
 	AllocConsole();
 	freopen("CONOUT$", "w", stdout);
+	freopen("CONIN$", "r", stdin);
 	PatchSpotify();
 	return 0;
 }

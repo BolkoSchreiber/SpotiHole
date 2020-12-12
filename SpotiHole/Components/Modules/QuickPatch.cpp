@@ -14,6 +14,8 @@
 
 namespace Modules
 {
+	double QuickPatch::newspeed = 1;
+
 	void QuickPatch::ToggleDeveloperTools(bool active)
 	{
 		bool* isDev = (bool*)0x01A14118;
@@ -29,10 +31,65 @@ namespace Modules
 		VirtualProtect((LPVOID)0x1291708, sizeof(std::string), OldProtection, &OldProtection);
 	}
 
+	void QuickPatch::ChangeSpeed()
+	{
+		double speed;
+
+		Utils::Utils::DebugPrint("Please select your new speed");
+		std::cin >> speed;
+
+		if (speed < 0 || speed > 10)
+		{
+			Utils::Utils::DebugPrint("Please select a value between 1 and 10");
+		}
+		else
+		{
+			newspeed = speed;
+		}
+	}
+
+	void  __declspec(naked) __fastcall QuickPatch::CreateTrack_stub(void* _this, DWORD edx, int a2, int a3, double speed, int normalization, int urgency, int flag, int a8, int stream_type)
+	{
+		__asm
+		{
+			push    ebp
+			mov     ebp, esp
+			push	-1
+			push    1218161h
+			push	0CB608Ah
+			retn
+		}
+	}
+
+	void __fastcall QuickPatch::CreateTrack_hk(void* _this, DWORD edx, int a2, int a3, double speed, int normalization, int urgency, int flag, int a8, int stream_type)
+	{
+		CreateTrack_stub(_this, edx, a2, a3, newspeed, normalization, urgency, flag, a8, stream_type);
+	}
+
+	void QuickPatch::Commands()
+	{
+		std::string cmd;
+
+		std::cin >> cmd;
+
+		if (cmd == "speed")
+		{
+			ChangeSpeed();
+		}
+
+		Commands();
+	}
+
+
+
 	QuickPatch::QuickPatch()
 	{
 		Utils::Utils::DebugPrint("Applying QuickPatch patch...");
+		Utils::Hook::InstallJmp(Functions::CreateTrack, CreateTrack_hk);
 		QuickPatch::ToggleDeveloperTools(1);
 		QuickPatch::Branding();
+
+		std::thread t1(QuickPatch::Commands);
+		t1.detach();
 	}
 }

@@ -8,6 +8,7 @@
 #include <thread>
 #include <d3d9.h>
 #include <fstream>
+#include <thread>
 
 //Utils
 #include "..\Utils\Utils.hpp"
