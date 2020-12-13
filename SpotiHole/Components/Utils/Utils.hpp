@@ -6,6 +6,7 @@ namespace Utils
 	{
 	public:
 		static void DebugPrint(const char*);
+		static void DebugPrint(int);
 		static int GetFileSize(const char* filename);
 	};
 }
