@@ -13,6 +13,15 @@
 - Enabled skip button for ads blocking
 - Enabled developer tools (Chrome Tools etc.)
 - Disabled auto updates
+- Enabled variable song speed
+
+## Commands:
+
+| Command | Usage | Arguments | Description |
+| --- | --- | ---| ---|
+| `speed` | `<cmd>` `<double>` | Value between 0.1 and 10 (Default 1) | Change the speed of your songs |
+
+  
 
 
 ## Requirements:
