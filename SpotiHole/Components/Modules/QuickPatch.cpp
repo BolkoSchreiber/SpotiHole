@@ -31,13 +31,8 @@ namespace Modules
 		VirtualProtect((LPVOID)0x1291708, sizeof(std::string), OldProtection, &OldProtection);
 	}
 
-	void QuickPatch::ChangeSpeed()
+	void QuickPatch::ChangeSpeed(double speed)
 	{
-		double speed;
-
-		Utils::Utils::DebugPrint("Please select your new speed");
-		std::cin >> speed;
-
 		if (speed < 0 || speed > 10)
 		{
 			Utils::Utils::DebugPrint("Please select a value between 1 and 10");
@@ -48,7 +43,7 @@ namespace Modules
 		}
 	}
 
-	void  __declspec(naked) __fastcall QuickPatch::CreateTrack_stub(void* _this, DWORD edx, int a2, int a3, double speed, int normalization, int urgency, int flag, int a8, int stream_type)
+	void __declspec(naked) __fastcall QuickPatch::CreateTrack_stub(void* _this, DWORD edx, int a2, int a3, double speed, int normalization, int urgency, int flag, int a8, int stream_type)
 	{
 		__asm
 		{
@@ -69,18 +64,33 @@ namespace Modules
 	void QuickPatch::Commands()
 	{
 		std::string cmd;
+		std::string number;
+		double speed;
 
-		std::cin >> cmd;
-
-		if (cmd == "speed")
+		std::getline(std::cin, cmd);
+		
+		if (strstr(cmd.c_str(), "speed") != nullptr)
 		{
-			ChangeSpeed();
+			try
+			{
+				number = cmd.substr(cmd.find("speed") + 6);
+				speed = std::stod(number);
+			}
+			catch (std::out_of_range& ex )
+			{
+				Utils::Utils::DebugPrint("Invalid command - Use <cmd> <arg>");
+				Commands();
+			}
+			catch (std::invalid_argument& ex)
+			{
+				Utils::Utils::DebugPrint("Invalid argument");
+				Commands();
+			}
+			ChangeSpeed(speed);
 		}
 
 		Commands();
 	}
-
-
 
 	QuickPatch::QuickPatch()
 	{
@@ -88,7 +98,6 @@ namespace Modules
 		Utils::Hook::InstallJmp(Functions::CreateTrack, CreateTrack_hk);
 		QuickPatch::ToggleDeveloperTools(1);
 		QuickPatch::Branding();
-
 		std::thread t1(QuickPatch::Commands);
 		t1.detach();
 	}
