@@ -33,9 +33,9 @@ namespace Modules
 
 	void QuickPatch::ChangeSpeed(double speed)
 	{
-		if (speed < 0 || speed > 10)
+		if (speed < 0.01 || speed > 10)
 		{
-			Utils::Utils::DebugPrint("Please select a value between 1 and 10");
+			Utils::Utils::DebugPrint("Please select a value between 0 and 10");
 		}
 		else
 		{
