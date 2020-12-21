@@ -80,10 +80,28 @@ namespace Modules
 		keybd_event(VK_MEDIA_NEXT_TRACK, 0, 0, 0);
 	}
 
+	void __declspec(naked) __fastcall DisableBanner(void* _this, DWORD edx, int a2, int a3)
+	{
+		__asm
+		{
+			mov		[ebp - 64h], esi
+			cmp     eax, [ecx + 4]
+			mov     ecx, [ebp - 5Ch]
+			jz		loc_77CA5E
+			push	077CA22h
+			retn
+
+			loc_77CA5E:
+			push	0077CA5Eh
+			retn
+		}
+	}
+
 	Adblock::Adblock()
 	{
 		Utils::Utils::DebugPrint("Applying AdBlock patch...");
 		Utils::Hook::InstallJmp(Functions::IsSkippable, EnableSkips_hk);
 		Utils::Hook::InstallJmp((void*)0xCB6143, SetCurrentTrack_stub);
+		Utils::Hook::InstallJmp((void*)0x77CA17, DisableBanner);
 	}
 }
