@@ -8,7 +8,6 @@
 
 ## Features:
 
-- Enabled high bitrate (experimental)
 - Auto skipping function for audio based ads
 - Enabled skip button for ads blocking
 - Enabled developer tools (Chrome Tools etc.)
