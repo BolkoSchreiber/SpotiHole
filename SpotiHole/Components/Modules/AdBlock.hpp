@@ -29,7 +29,7 @@ namespace Modules
 		static void __fastcall SetCurrentTrack_stub(void* _this, DWORD edx, int a2, int a3, __int64 speed, int normalization, int urgency, int flag, int a8, int stream_type);
 		static void IsAdOrTrack();
 		static void SkipAd();
-		static void DisableBanner_stub();
+		static void __fastcall DisableBanner_stub(void* _this, DWORD edx, int a2, int a3);
 		//static std::string GetAdCounter();
 	
 	};

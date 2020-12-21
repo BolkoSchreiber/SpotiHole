@@ -80,7 +80,7 @@ namespace Modules
 		keybd_event(VK_MEDIA_NEXT_TRACK, 0, 0, 0);
 	}
 
-	void __declspec(naked) __fastcall DisableBanner(void* _this, DWORD edx, int a2, int a3)
+	void __declspec(naked) __fastcall Adblock::DisableBanner_stub(void* _this, DWORD edx, int a2, int a3)
 	{
 		__asm
 		{
@@ -102,6 +102,6 @@ namespace Modules
 		Utils::Utils::DebugPrint("Applying AdBlock patch...");
 		Utils::Hook::InstallJmp(Functions::IsSkippable, EnableSkips_hk);
 		Utils::Hook::InstallJmp((void*)0xCB6143, SetCurrentTrack_stub);
-		Utils::Hook::InstallJmp((void*)0x77CA17, DisableBanner);
+		Utils::Hook::InstallJmp((void*)0x77CA17, DisableBanner_stub);
 	}
 }
