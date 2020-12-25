@@ -97,11 +97,32 @@ namespace Modules
 		}
 	}
 
+	void __declspec(naked) __fastcall Adblock::DisableVideoAds_stub(void* __this, DWORD edx, int a2, int a3)
+	{
+		__asm
+		{
+			jz      loc_7668F9
+			cmp     byte ptr[ebp - 154], 0
+			jnz     loc_76686C
+			cmp     byte ptr[ebp - 99h], 0
+			jnz     loc_7668F9
+
+			loc_7668F9:
+			push	07668F9h
+			retn
+
+			loc_76686C:
+			push	076686Ch
+			retn
+		}
+	}
+
 	Adblock::Adblock()
 	{
 		Utils::Utils::DebugPrint("Applying AdBlock patch...");
 		Utils::Hook::InstallJmp(Functions::IsSkippable, EnableSkips_hk);
 		Utils::Hook::InstallJmp((void*)0xCB6143, SetCurrentTrack_stub);
 		Utils::Hook::InstallJmp((void*)0x77CA17, DisableBanner_stub);
+		Utils::Hook::InstallJmp((void*)0x766850, DisableVideoAds_stub);
 	}
 }

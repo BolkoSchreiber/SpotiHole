@@ -20,7 +20,6 @@ namespace Modules
 		static const char* currentTrack;
 		static bool isAd;
 		static std::string savedSong;
-		//static int adCounter;
 
 	public:
 		Adblock();
@@ -30,7 +29,7 @@ namespace Modules
 		static void IsAdOrTrack();
 		static void SkipAd();
 		static void __fastcall DisableBanner_stub(void* _this, DWORD edx, int a2, int a3);
-		//static std::string GetAdCounter();
+		static void __fastcall DisableVideoAds_stub(void* __this, DWORD edx, int a2, int a3);
 	
 	};
 }
