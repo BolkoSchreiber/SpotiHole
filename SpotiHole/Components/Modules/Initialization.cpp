@@ -16,7 +16,7 @@ namespace Modules
 {
 	void Initialization::WelcomeMessage()
 	{
-		Utils::Utils::DebugPrint("SpotiHole v0.03 - by meik97");
+		Utils::Utils::DebugPrint("SpotiHole v0.0.4 - by meik97");
 	}
 
 	bool Initialization::CheckSpotify()
