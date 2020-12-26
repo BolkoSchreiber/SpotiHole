@@ -8,8 +8,8 @@
 
 ## Features:
 
-- Auto skipping function for audio based ads
-- Enabled skip button for ads blocking
+- Disabled audio, video and banner ads
+- Enabled permanent skip button
 - Enabled developer tools (Chrome Tools etc.)
 - Disabled auto updates
 - Enabled variable song speed
