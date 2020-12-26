@@ -22,4 +22,10 @@ namespace Utils
 		std::ifstream in(filename, std::ifstream::ate | std::ifstream::binary);
 		return in.tellg();
 	}
+
+	bool Utils::FileExists(std::string file)
+	{
+		std::ifstream filetocheck(file.c_str());
+		return filetocheck.good();
+	}
 }

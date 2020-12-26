@@ -20,5 +20,6 @@ namespace Modules
 		Initialization();
 		static void WelcomeMessage();
 		static bool CheckSpotify();
+		static void Console();
 	};
 }

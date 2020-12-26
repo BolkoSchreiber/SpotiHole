@@ -29,8 +29,17 @@ namespace Modules
 		return true;
 	}
 
+	void Initialization::Console()
+	{
+		if (Utils::Utils::FileExists("console"))
+		{
+			ShowWindow(GetConsoleWindow(), SW_HIDE);
+		}
+	}
+	
 	Initialization::Initialization()
 	{
+		Initialization::Console();
 		Initialization::WelcomeMessage();
 
 		if (Initialization::CheckSpotify())
