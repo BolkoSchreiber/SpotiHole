@@ -25,10 +25,11 @@ namespace Modules
 	void QuickPatch::Branding()
 	{
 		DWORD OldProtection;
+		char version[] = "SpotiHole v0.0.4";
 
-		VirtualProtect((LPVOID)0x1291708, sizeof(std::string), PAGE_EXECUTE_READWRITE, &OldProtection);
-		*(std::string*)0x1291708 = (std::string)"SpotiHole";
-		VirtualProtect((LPVOID)0x1291708, sizeof(std::string), OldProtection, &OldProtection);
+		VirtualProtect((void*)0x1291708, sizeof(version), PAGE_EXECUTE_READWRITE, &OldProtection);
+		memcpy((void*)0x1291708, version, sizeof(version));
+		VirtualProtect((void*)0x1291708, sizeof(version), OldProtection, &OldProtection);
 	}
 
 	void QuickPatch::ChangeSpeed(double speed)
@@ -45,6 +46,7 @@ namespace Modules
 
 	void __declspec(naked) __fastcall QuickPatch::CreateTrack_stub(void* _this, DWORD edx, int a2, int a3, double speed, int normalization, int urgency, int flag, int a8, int stream_type)
 	{
+		
 		__asm
 		{
 			push    ebp
