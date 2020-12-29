@@ -19,6 +19,7 @@ namespace Modules
 	public:
 		Initialization();
 		static void WelcomeMessage();
+		static void InitDone();
 		static bool CheckSpotify();
 		static void Console();
 	};

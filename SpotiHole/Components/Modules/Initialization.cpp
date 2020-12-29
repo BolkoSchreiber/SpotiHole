@@ -19,6 +19,11 @@ namespace Modules
 		Utils::Utils::DebugPrint("SpotiHole v0.0.4 - by meik97");
 	}
 
+	void Initialization::InitDone()
+	{
+		Utils::Utils::DebugPrint("Done.");
+	}
+
 	bool Initialization::CheckSpotify()
 	{
 		if (Utils::Utils::GetFileSize("Spotify.exe") != 23412456)
@@ -48,6 +53,10 @@ namespace Modules
 			Adblock::Adblock();
 			QuickPatch::QuickPatch();
 			//Bitrate::Bitrate();
+
+			Initialization::InitDone();
 		}
+
+
 	}
 }
