@@ -16,7 +16,7 @@ namespace Modules
 {
 	void Initialization::WelcomeMessage()
 	{
-		Utils::Utils::DebugPrint("SpotiHole v0.0.4 - by meik97");
+		Utils::Utils::DebugPrint("SpotiHole v0.0.5 - by meik97");
 	}
 
 	void Initialization::InitDone()
@@ -53,10 +53,7 @@ namespace Modules
 			Adblock::Adblock();
 			QuickPatch::QuickPatch();
 			//Bitrate::Bitrate();
-
 			Initialization::InitDone();
 		}
-
-
 	}
 }
