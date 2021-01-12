@@ -173,7 +173,7 @@
     <ClCompile Include="Components\Modules\QuickPatch.cpp" />
     <ClCompile Include="Components\Utils\Hooking.cpp" />
     <ClCompile Include="Components\Utils\Utils.cpp" />
-    <ClCompile Include="SpotiHook.cpp" />
+    <ClCompile Include="SpotiHole.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

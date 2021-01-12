@@ -53,9 +53,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SpotiHook.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="Components\Modules\AdBlock.cpp">
       <Filter>Components\Modules</Filter>
     </ClCompile>
@@ -79,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="Components\Modules\Bitrate.cpp">
       <Filter>Components\Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotiHole.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
