@@ -17,7 +17,6 @@ namespace Modules
 	const char* Adblock::currentTrack;
 	std::string Adblock::savedSong;
 	bool Adblock::isAd;
-	//int Adblock::adCounter = 0;
 
 	bool __fastcall Adblock::EnableSkips_hk(void* _this, DWORD edx)
 	{
@@ -59,19 +58,14 @@ namespace Modules
 
 	void Adblock::IsAdOrTrack()
 	{
-		if (strstr(currentTrack, "spotify:ad:") != nullptr)
+		if (strstr(currentTrack, "spotify:track:") == nullptr && strstr(currentTrack, "spotify:episode:") == nullptr)
 		{
 			Utils::Utils::DebugPrint(currentTrack);
-
-			//TODO: Replace SkipAd with original skip function
 			SkipAd();
-			isAd = 1;
 		}
-		
-		if (strstr(currentTrack, "spotify:track:") != nullptr )
+		else
 		{
 			Utils::Utils::DebugPrint(currentTrack);
-			isAd = 0;
 		}
 	}
 
@@ -88,7 +82,9 @@ namespace Modules
 			cmp     eax, [ecx + 4]
 			mov     ecx, [ebp - 5Ch]
 			jz		loc_77CA5E
-			push	077CA22h
+			cmp     ecx, esi
+			jz      loc_77CA5E
+			push	077CA26h
 			retn
 
 			loc_77CA5E:
@@ -117,6 +113,41 @@ namespace Modules
 		}
 	}
 
+	void __declspec(naked) __fastcall Adblock::DisableVideoAds_stub2(void* __this, DWORD edx, int a2, int a3)
+	{
+		__asm
+		{
+			mov     eax, [edi]
+			cmp     byte ptr[eax + 3Ch], 0
+			jnz     loc_7669AE
+			push	0766905h
+			retn
+
+			loc_7669AE:
+			push	07669AEh
+			retn
+		}
+	}
+
+	DWORD sub_5D3AA0 = 0x5D3AA0;
+	void __declspec(naked) __fastcall Adblock::ResponseError_stub(void* __this, DWORD edx, int a2, int a3)
+	{
+		__asm
+		{
+			cmp     eax, 200
+			jnl     loc_7775CC
+			mov     ecx, esi
+			call    sub_5D3AA0
+			cmp     eax, 300
+			jle     loc_7775CC
+			jmp		loc_7775CC 
+
+			loc_7775CC:
+			push	07775CCh
+			retn
+		}
+	}
+
 	Adblock::Adblock()
 	{
 		Utils::Utils::DebugPrint("Applying AdBlock patch...");
@@ -124,5 +155,7 @@ namespace Modules
 		Utils::Hook::InstallJmp((void*)0xCB6143, SetCurrentTrack_stub);
 		Utils::Hook::InstallJmp((void*)0x77CA17, DisableBanner_stub);
 		Utils::Hook::InstallJmp((void*)0x766850, DisableVideoAds_stub);
+		Utils::Hook::InstallJmp((void*)0x7668F9, DisableVideoAds_stub2);
+		Utils::Hook::InstallJmp((void*)0x777549, ResponseError_stub);
 	}
 }
