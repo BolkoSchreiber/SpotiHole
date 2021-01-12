@@ -18,14 +18,16 @@ namespace Modules
 
 	void QuickPatch::ToggleDeveloperTools(bool active)
 	{
-		bool* isDev = (bool*)0x01A14118;
+		bool* isDev = (bool*)0x1A14118;
+		bool* isEmployee = (bool*)0x1A1411A;
+		bool* isBetaTester = (bool*)0x1A14119;
 		*isDev = active;
 	}
 
 	void QuickPatch::Branding()
 	{
 		DWORD OldProtection;
-		char version[] = "SpotiHole v0.0.4";
+		char version[] = "SpotiHole v0.0.5";
 
 		VirtualProtect((void*)0x1291708, sizeof(version), PAGE_EXECUTE_READWRITE, &OldProtection);
 		memcpy((void*)0x1291708, version, sizeof(version));
@@ -46,7 +48,6 @@ namespace Modules
 
 	void __declspec(naked) __fastcall QuickPatch::CreateTrack_stub(void* _this, DWORD edx, int a2, int a3, double speed, int normalization, int urgency, int flag, int a8, int stream_type)
 	{
-		
 		__asm
 		{
 			push    ebp
@@ -90,17 +91,19 @@ namespace Modules
 			}
 			ChangeSpeed(speed);
 		}
-
 		Commands();
 	}
 
 	QuickPatch::QuickPatch()
 	{
+		QuickPatch::Branding();
 		Utils::Utils::DebugPrint("Applying QuickPatch patch...");
 		Utils::Hook::InstallJmp(Functions::CreateTrack, CreateTrack_hk);
-		QuickPatch::ToggleDeveloperTools(1);
-		QuickPatch::Branding();
 		std::thread t1(QuickPatch::Commands);
 		t1.detach();
+
+		Sleep(5000);
+		QuickPatch::ToggleDeveloperTools(1);
+
 	}
 }
