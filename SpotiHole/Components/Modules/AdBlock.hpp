@@ -31,7 +31,6 @@ namespace Modules
 		static void __fastcall DisableBanner_stub(void* _this, DWORD edx, int a2, int a3);
 		static void __fastcall DisableVideoAds_stub(void* __this, DWORD edx, int a2, int a3);
 		static void __fastcall DisableVideoAds_stub2(void* __this, DWORD edx, int a2, int a3);
-		static void __fastcall ResponseError_stub(void* __this, DWORD edx, int a2, int a3)
-	
+		static void __fastcall ResponseError_stub(void* __this, DWORD edx, int a2, int a3);
 	};
 }
